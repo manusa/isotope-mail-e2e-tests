@@ -1,0 +1,33 @@
+{
+  "name": "isotope-mail-integration-tests",
+  "version": "1.0.0",
+  "description": "Integration tests for Isotope Mail Client",
+  "main": "index.js",
+  "scripts": {
+    "test": "cucumber-js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manusa/isotope-mail-integration-tests.git"
+  },
+  "author": {
+    "name": "Marc Nuri",
+    "url": "https://blog.marcnuri.com"
+  },
+  "license": "Apache-2.0",
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/manusa/isotope-mail-integration-tests/issues"
+  },
+  "homepage": "https://github.com/manusa/isotope-mail-integration-tests#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "cucumber": "^5.1.0",
+    "selenium-webdriver": "^4.0.0-alpha.1"
+  }
+}
