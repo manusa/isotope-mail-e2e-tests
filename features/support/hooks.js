@@ -15,7 +15,7 @@ const createBrowserStackSession = () =>
   .usingServer('http://hub-cloud.browserstack.com/wd/hub')
   .withCapabilities({
     projectName : 'Isotope Mail Client',
-    buildName: travisBuild ? travisBuild : 'local',
+    buildName: travisBuild ? 'CI' : 'local',
     browserName: 'Edge',
     browserVersion: '18.0',
     'bstack:options': {
