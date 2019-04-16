@@ -34,7 +34,7 @@ Before(function (scenario, callback) {
   callback();
 });
 
-After(function (scenario, callback) {
-  this.driver.quit();
-  callback();
+After(async function (scenario) {
+  const world = this;
+  world.driver.quit();
 });

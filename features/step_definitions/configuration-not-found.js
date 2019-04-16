@@ -21,4 +21,6 @@ Then(/^I'm shown an error page stating configuration wasn't found$/,
     expect(await title.getAttribute('innerHTML')).to.equal('Sorry');
     const rootUrl = url.match(/^https?:\/\/[^/]*?\//)[0];
     expect(await errorPage.findElement(By.css('a')).getAttribute('href')).to.equal(rootUrl);
+     const screenShot = await world.driver.takeScreenshot();
+     world.attach(screenShot, 'image/png');
   });

@@ -1,8 +1,6 @@
 const fs = require('fs');
 const {sep} = require('path');
-
-const REPORTS_LOCATION = `.${sep}build${sep}reports`;
-const JSON_REPORT = `${REPORTS_LOCATION}${sep}cucumber_report.json`;
+const {REPORTS_LOCATION, JSON_REPORT} = require('./constants.js');
 
 // Set defaults
 const cucumber = {
