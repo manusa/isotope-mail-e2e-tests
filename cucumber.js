@@ -1,15 +1,21 @@
 const fs = require('fs');
 const {sep} = require('path');
 
-const reportsLocation = `.${sep}build${sep}reports`;
+const REPORTS_LOCATION = `.${sep}build${sep}reports`;
+const JSON_REPORT = `${REPORTS_LOCATION}${sep}cucumber_report.json`;
 
 // Set defaults
 const cucumber = {
-  default: `--format-options '{"snippetInterface": "synchronous"}'`
+  default: `-f summary -f json:${JSON_REPORT} --format-options '{"snippetInterface": "synchronous"}'`,
+  REPORTS_LOCATION,
+  JSON_REPORT
 };
 
 // Prepare environment
-reportsLocation.split(sep)
+if (fs.existsSync(JSON_REPORT)){
+  fs.unlinkSync(JSON_REPORT);
+}
+REPORTS_LOCATION.split(sep)
   .reduce((acc, dir) => {
     const currentDir = `${acc}${dir}${sep}`;
     if (!fs.existsSync(currentDir)){
