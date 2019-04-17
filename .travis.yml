@@ -7,6 +7,7 @@ script:
 - npm test
 before_deploy:
 - echo "" > "${TRAVIS_BUILD_DIR}"/.gitignore
+- npm run generate-test-report
 deploy:
 - provider: pages
   skip-cleanup: true
