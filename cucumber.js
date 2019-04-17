@@ -1,6 +1,5 @@
-const fs = require('fs');
-const {sep} = require('path');
 const {REPORTS_LOCATION, JSON_REPORT} = require('./constants.js');
+const {deleteDirectory, mkdirRecursive} =  require('./utils');
 
 // Set defaults
 const cucumber = {
@@ -10,17 +9,7 @@ const cucumber = {
 };
 
 // Prepare environment
-if (fs.existsSync(JSON_REPORT)){
-  fs.unlinkSync(JSON_REPORT);
-}
-REPORTS_LOCATION.split(sep)
-  .reduce((acc, dir) => {
-    const currentDir = `${acc}${dir}${sep}`;
-    if (!fs.existsSync(currentDir)){
-      fs.mkdirSync(currentDir);
-    }
-    return currentDir;
-  }, '');
-
+deleteDirectory(REPORTS_LOCATION);
+mkdirRecursive(REPORTS_LOCATION);
 
 module.exports = cucumber;

@@ -1,13 +1,17 @@
 #!/usr/bin/env node
 const reporter = require('cucumber-html-reporter');
+const fs = require('fs');
 const {sep} = require('path');
-const {REPORTS_LOCATION, JSON_REPORT} = require('./constants.js');
+const {REPORTS_LOCATION, JSON_REPORT, PUBLIC_LOCATION} = require('./constants.js');
+const {deleteDirectory, mkdirRecursive} =  require('./utils');
 const localEnv = process.env.TRAVIS_BUILD_NUMBER ? false : true;
+
+const outputFile = `${REPORTS_LOCATION}${sep}cucumber_report.html`;
 
 const options = {
   theme: 'bootstrap',
   jsonFile: JSON_REPORT,
-  output: `${REPORTS_LOCATION}${sep}cucumber_report.html`,
+  output: outputFile,
   reportSuiteAsScenarios: true,
   launchReport: localEnv,
   metadata: {
@@ -21,3 +25,7 @@ const options = {
 };
 
 reporter.generate(options);
+
+deleteDirectory(PUBLIC_LOCATION);
+mkdirRecursive(PUBLIC_LOCATION);
+fs.copyFileSync(outputFile, `${PUBLIC_LOCATION}${sep}index.html`);
