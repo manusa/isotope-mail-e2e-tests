@@ -14,13 +14,11 @@ const options = {
   output: outputFile,
   reportSuiteAsScenarios: true,
   launchReport: localEnv,
+  name: "Isotope Mail Client e2e tests",
+  brandTitle: "End-to-End tests",
   metadata: {
-    "App Version":"0.3.2",
-    "Test Environment": "STAGING",
-    "Browser": "Chrome  54.0.2840.98",
-    "Platform": "Windows 10",
-    "Parallel": "Scenarios",
-    "Executed": "Remote"
+    "Project home": "<a href='https://github.com/manusa/isotope-mail'>Isotope Mail Client</a>",
+    "Project tests home": "<a href='https://github.com/manusa/isotope-mail-e2e-tests'>Isotope Mail Client e2e tests</a>",
   }
 };
 
