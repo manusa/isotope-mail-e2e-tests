@@ -3,7 +3,13 @@ Feature: Login
   As an Isotope Mail Client User
   I want to be able to login
 
-  Scenario: Fixed route exists for login page
-    Given a fixed login route URL https://isotope.marcnuri.com/login
+  Scenario Outline: Fixed route exists for login page (<browser>)
+    Given <browser> browser and a fixed login route URL https://isotope.marcnuri.com/login
     When I access this URL to login
     Then  I'm shown a login page with a form to input my credentials
+
+  Examples:
+  | browser |
+  | chrome  |
+  | firefox |
+  | edge    |

@@ -1,5 +1,5 @@
 
-const {After, Before, BeforeAll, AfterAll, setDefaultTimeout} = require('cucumber');
+const {After, Before, BeforeAll, AfterAll, Status, setDefaultTimeout} = require('cucumber');
 const webdriver = require('selenium-webdriver');
 
 const TIMEOUT = 60*1000;
@@ -7,7 +7,8 @@ const travisBuild = process.env.TRAVIS_BUILD_NUMBER;
 const username = process.env.BROWSERSTACK_USERNAME;
 const accessKey = process.env.BROWSERSTACK_ACCESS_KEY;
 const browsers = {
-  chrome: {browserName: 'Chrome', browserVersion: '65'},
+  chrome: {browserName: 'Chrome', browserVersion: '73.0'},
+  firefox: {browserName: 'Firefox', browserVersion: '66.0'},
   edge: {browserName: 'Edge', browserVersion: '18.0'},
 };
 
@@ -35,8 +36,10 @@ const driver = {};
 
 BeforeAll(function() {
   const world = this;
-  driver.chrome = createBrowserStackSession(browsers.chrome);
-  driver.edge = createBrowserStackSession(browsers.edge);
+  Object.entries(browsers)
+    .forEach(([key, value]) => {
+      driver[key] = createBrowserStackSession(value);
+  });
 });
 Before(function () {
   const world = this;
@@ -48,10 +51,13 @@ Before(function () {
 //   callback();
 // });
 AfterAll(function() {
-  driver.chrome.quit();
-  driver.edge.quit();
+  Object.values(driver).forEach(currentDriver => currentDriver.quit());
 });
-// After(async function (scenario) {
-//   const world = this;
-//   world.driver.quit();
-// });
+After(async function (testCase) {
+  const world = this;
+  if (testCase.result.status === Status.FAILED) {
+    // NO EASY WAY TO DETERMINE CURRENT BROWSER AT THIS POINT
+    // const screenShot = await world.driver.takeScreenshot();
+    // world.attach(screenShot, 'image/png');
+  }
+});
