@@ -13,3 +13,8 @@ Feature: Login
   | chrome  |
   | firefox |
   | edge    |
+
+  Scenario: Root URL redirects to login page if no session was started
+    Given Isotope's base URL https://isotope.marcnuri.com
+    When I access this URL without a session
+    Then I'm redirected to the login page

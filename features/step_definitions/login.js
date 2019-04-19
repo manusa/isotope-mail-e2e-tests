@@ -24,3 +24,22 @@ Then(/^I'm shown a login page with a form to input my credentials$/,
     const screenShot = await driver.takeScreenshot();
     world.attach(screenShot, 'image/png');
   });
+
+Given(/^Isotope's base URL (.*)$/,
+  function(givenUrl) {
+    const world = this;
+    url = givenUrl;
+    driver = world.driver.chrome;
+  });
+When(/^I access this URL without a session$/, function() {
+  driver.get(url);
+});
+Then(/^I'm redirected to the login page$/,
+  async function() {
+    const world = this;
+     await driver.wait(until.elementLocated(By.css('div[class^="login--background"]')));
+    const currentUrl = await driver.getCurrentUrl();
+    expect(currentUrl).to.equal(`${url}/login`);
+    const screenShot = await driver.takeScreenshot();
+    world.attach(screenShot, 'image/png');
+  });
