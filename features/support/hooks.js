@@ -1,3 +1,5 @@
+const fs = require('fs');
+const {STATUS_BADGE, FAILURE_BADGE} = require('../../constants.js');
 
 const {After, Before, BeforeAll, AfterAll, Status, setDefaultTimeout} = require('cucumber');
 const webdriver = require('selenium-webdriver');
@@ -56,6 +58,8 @@ AfterAll(function() {
 After(async function (testCase) {
   const world = this;
   if (testCase.result.status === Status.FAILED) {
+    // Overwrite success badge
+    fs.copyFileSync(FAILURE_BADGE, STATUS_BADGE);
     // NO EASY WAY TO DETERMINE CURRENT BROWSER AT THIS POINT
     // const screenShot = await world.driver.takeScreenshot();
     // world.attach(screenShot, 'image/png');

@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 const reporter = require('cucumber-html-reporter');
 const fs = require('fs');
-const {sep} = require('path');
-const {REPORTS_LOCATION, JSON_REPORT, PUBLIC_LOCATION} = require('./constants.js');
+const path = require('path');
+const {STATUS_BADGE, REPORTS_LOCATION, JSON_REPORT, PUBLIC_LOCATION} = require('./constants.js');
 const {deleteDirectory, mkdirRecursive} =  require('./utils');
 const localEnv = process.env.TRAVIS_BUILD_NUMBER ? false : true;
 
-const outputFile = `${REPORTS_LOCATION}${sep}cucumber_report.html`;
+const outputFile = path.join(REPORTS_LOCATION, 'cucumber_report.html');
 
 const options = {
   theme: 'bootstrap',
@@ -26,4 +26,5 @@ reporter.generate(options);
 
 deleteDirectory(PUBLIC_LOCATION);
 mkdirRecursive(PUBLIC_LOCATION);
-fs.copyFileSync(outputFile, `${PUBLIC_LOCATION}${sep}index.html`);
+fs.copyFileSync(outputFile, path.join(PUBLIC_LOCATION, 'index.html'));
+fs.copyFileSync(STATUS_BADGE, path.join(PUBLIC_LOCATION, path.basename(STATUS_BADGE)));
