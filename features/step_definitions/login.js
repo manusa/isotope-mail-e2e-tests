@@ -38,8 +38,7 @@ Then(/^I'm redirected to the login page$/,
   async function() {
     const world = this;
      await driver.wait(until.elementLocated(By.css('div[class^="login--background"]')));
-    const currentUrl = await driver.getCurrentUrl();
-    expect(currentUrl).to.equal(`${url}/login`);
+     await driver.wait(until.urlMatches(new RegExp(`^${url}/login$`)));
     const screenShot = await driver.takeScreenshot();
     world.attach(screenShot, 'image/png');
   });
