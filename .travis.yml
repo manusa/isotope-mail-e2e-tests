@@ -17,8 +17,6 @@ deploy:
   local-dir: build/public
   on:
     branch: master
-after_deploy:
-- [[ $BUILD_EXIT_VALUE = "0" ]] && exit 0 || exit 1
 env:
   global:
   - secure: XEWyha8eMdRAaLeL2fyAIRT6pDIScYUOIx7gt/DF10KbXuOhd8CCOP0qqF1OMH6OEYLAr6GD5kjP2IQkBb7v0dzc/umdZflmjZw0XanfAwoFRqLwm7rQQsiVSasTFj+q8Mmf05O4G0w3Hvr8RetO48IfKTiP/qgt+JYdxA0OV40M2eobY5/dSA+aaknrtnB1DOCS4o0PYWsMtDabXP4Cz5GPaYQ1yfImbPdf/UCufpLIDCpdJ714polhZv7DrbGqCtUNHdfQLW9j5p7ZhbkxXqPrtWVgWKa3QzJpxBOYvazHKgApCNlmGVmdHzP+wa5+ewkYt5zCDS6iiBX9mbn2mx3+mcPK6d4GrKi2pou7O9iA5VD4pGT6NVDsr2icW9W14celeuhVbbyBr/fYZIfz5iDbJdT+7yTn4WCP594HCWOwT4MsyS+CdsC0GPqpKmc4ooZWqyG+cpwbQvS1Tkal8Q6RUrRBlOPTcIOhfr9B6Z4mlLicmU1R1uqPfwCtsdO9fHJC8Y+d9h9hbzzOJplOTzRH/woHj3pPfeqFY1N5X7rUa0ih5We4XWYIdEvfKLkTrch5Wf+t6GY2zIiJXuR+IMmNmd8KZxmsezx26r48LB2ycdHxc2io43itiz3A7fRH4900qMjArIMAmQ1z7makOXSveq9mS7rg1AFFntU0250=
