@@ -10,11 +10,11 @@ let driver;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Fixed route exists for login page (<browser>)
-Given(/^([a-z]*?) browser and a fixed login route URL (.*)$/,
-  function(browser, givenUrl) {
+Given(/^a fixed login route URL (.*)$/,
+  function(givenUrl) {
     const world = this;
     url = givenUrl;
-    driver = world.driver[browser];
+    driver = world.driver;
   });
 When(/^I access this URL to login$/, function() {
   driver.get(url);
@@ -35,7 +35,7 @@ Given(/^Isotope's base URL (.*)$/,
   function(givenUrl) {
     const world = this;
     url = givenUrl;
-    driver = world.driver.chrome;
+    driver = world.driver;
   });
 When(/^I access this URL without a session$/, function() {
   driver.get(url);
@@ -51,10 +51,10 @@ Then(/^I'm redirected to the login page$/,
 
 ////////////////////////////////////////////////////////////////////////////////
 // I can login to the application (<browser>)
-Given(/^([a-z]*?) browser and a login form in the URL (.*)$/,
-  async function(browser, givenUrl) {
+Given(/^a login form in the URL (.*)$/,
+  async function(givenUrl) {
     const world = this;
-    driver = world.driver[browser];
+    driver = world.driver;
     driver.get(givenUrl);
     await driver.wait(until.elementLocated(By.css('div[class^="login--background"]')));
   });

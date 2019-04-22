@@ -6,10 +6,10 @@ const expect = chai.expect;
 
 let url;
 let driver;
-Given(/^([a-z]*?) browser and a fixed error route URL (.*)$/,
-  function(givenBrowser, givenUrl) {
+Given(/^a fixed error route URL (.*)$/,
+  function(givenUrl) {
     const world = this;
-    driver = world.driver[givenBrowser];
+    driver = world.driver;
     url = givenUrl;
   });
 When(/^I access this URL$/, function() {

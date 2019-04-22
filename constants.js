@@ -1,19 +1,28 @@
 const {sep} = require('path');
 
-const ASSETS_LOCATION = `.${sep}assets`;
-const SUCCESS_BADGE = `${ASSETS_LOCATION}${sep}e2e-tests-passing.png`;
-const FAILURE_BADGE = `${ASSETS_LOCATION}${sep}e2e-tests-failing.png`;
+const browserId = process.env.BROWSER_ID || 'default';
+
 const REPORTS_LOCATION = `.${sep}build${sep}reports`;
-const JSON_REPORT = `${REPORTS_LOCATION}${sep}cucumber_report.json`;
-const STATUS_BADGE = `${REPORTS_LOCATION}${sep}status_badge.png`;
+const JSON_REPORT = `${REPORTS_LOCATION}${sep}${browserId}.cucumber_report.json`;
 const PUBLIC_LOCATION = `.${sep}build${sep}public`;
+const BROWSERS = {
+  chrome: {
+    browserName: 'Chrome',
+    browserVersion: '73.0'
+  },
+  firefox: {
+    browserName: 'Firefox',
+    browserVersion: '66.0'
+  },
+  edge: {
+    browserName: 'Edge',
+    browserVersion: '18.0'
+  },
+};
 
 module.exports =  {
-  ASSETS_LOCATION,
-  SUCCESS_BADGE,
-  FAILURE_BADGE,
   REPORTS_LOCATION,
   JSON_REPORT,
-  STATUS_BADGE,
   PUBLIC_LOCATION,
+  BROWSERS,
 };

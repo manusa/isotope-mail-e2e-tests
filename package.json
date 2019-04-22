@@ -4,7 +4,9 @@
   "description": "Integration tests for Isotope Mail Client",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js",
+    "test": "npm run parallel-test",
+    "single-test": "cucumber-js",
+    "parallel-test": "node parallel-test.js",
     "generate-test-report": "node generate-test-report.js"
   },
   "repository": {
