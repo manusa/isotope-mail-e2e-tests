@@ -60,17 +60,18 @@ Given(/^([a-z]*?) browser and a login form in the URL (.*)$/,
   });
 When(/^I fill in and submit the login form$/,
   async function() {
-    const serverHost = await driver.findElement(By.css('#serverHost'));
+    const container = await driver.wait(until.elementLocated(By.css('div[class^="login--container"]')));
+    const serverHost = await container.findElement(By.css('#serverHost'));
     serverHost.sendKeys('isotope');
-    const user = await driver.findElement(By.css('#user'));
+    const user = await container.findElement(By.css('#user'));
     user.sendKeys('isotope');
-    const password = await driver.findElement(By.css('#password'));
+    const password = await container.findElement(By.css('#password'));
     password.sendKeys('demo');
-    const advancedButton = driver.findElement(By.css('button[class^="mdc-button advancedButton"]'));
+    const advancedButton = container.findElement(By.css('button[class^="mdc-button advancedButton"]'));
     await advancedButton.click();
-    const smtpPort = await driver.findElement(By.css('#smtpPort'));
+    const smtpPort = await container.findElement(By.css('#smtpPort'));
     smtpPort.sendKeys(Key.BACK_SPACE, Key.BACK_SPACE, Key.BACK_SPACE, '25');
-    const smtpSsl = await driver.findElement(By.css('#smtpSsl'));
+    const smtpSsl = await container.findElement(By.css('#smtpSsl'));
     smtpSsl.click();
     const loginButton = await driver.wait(until.elementLocated(By.css('button[class^="mdc-button loginButton"]')));
     await loginButton.click();
