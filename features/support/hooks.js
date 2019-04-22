@@ -43,15 +43,13 @@ BeforeAll(function() {
       driver[key] = createBrowserStackSession(value);
   });
 });
-Before(function () {
+Before(async function () {
   const world = this;
   world.driver = driver;
+  await Object.values(driver).forEach(async browser => {
+    await browser.manage().deleteAllCookies();
+  });
 });
-// Before(function (scenario, callback) {
-//   const world = this;
-//   world.driver = createBrowserStackSession();
-//   callback();
-// });
 AfterAll(function() {
   Object.values(driver).forEach(currentDriver => currentDriver.quit());
 });
