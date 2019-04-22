@@ -24,7 +24,7 @@ Then(/^I'm shown a login page with a form to input my credentials$/,
     const world = this;
     const loginPage = await driver.wait(until.elementLocated(By.css('div[class^="login--background"]')));
     const title = await loginPage.findElement(By.css('h1'));
-    expect(await title.getAttribute('innerHTML')).to.equal('Isotope Mail Client');
+    expect(await title.getAttribute('innerHTML')).to.equal('Isotope Mail ClienFAILt');
     const screenShot = await driver.takeScreenshot();
     world.attach(screenShot, 'image/png');
   });
