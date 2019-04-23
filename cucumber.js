@@ -1,13 +1,8 @@
-const {REPORTS_LOCATION, JSON_REPORT} = require('./constants.js');
-const {deleteDirectory, mkdirRecursive} =  require('./utils');
+const {JSON_REPORT} = require('./constants.js');
 
 // Set defaults
 const cucumber = {
   default: `-f summary -f json:${JSON_REPORT} --format-options '{"snippetInterface": "synchronous"}'`,
 };
-
-// Prepare environment
-deleteDirectory(REPORTS_LOCATION);
-mkdirRecursive(REPORTS_LOCATION);
 
 module.exports = cucumber;

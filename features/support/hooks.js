@@ -14,16 +14,19 @@ const createBrowserStackSession = (browser = BROWSERS.edge) =>
   new webdriver.Builder()
   .usingServer('http://hub-cloud.browserstack.com/wd/hub')
   .withCapabilities({
-    projectName : 'Isotope Mail Client',
+    projectName: 'Isotope Mail Client',
     buildName: travisBuild ? 'CI' : 'local',
     browserName: browser.browserName,
     browserVersion: browser.browserVersion,
+    device: browser.deviceName,
+    realMobile: true,
     'bstack:options': {
       userName: username,
       accessKey: accessKey,
-      os: 'Windows',
-      osVersion : '10',
-      resolution : '1920x1080',
+      os: browser.os,
+      osVersion: browser.osVersion,
+      resolution: browser.resolution,
+      deviceName: browser.deviceName,
     },
   })
   .build();
