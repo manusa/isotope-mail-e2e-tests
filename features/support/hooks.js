@@ -20,6 +20,8 @@ const createBrowserStackSession = (browser = BROWSERS.edge) =>
     browserVersion: browser.browserVersion,
     device: browser.deviceName,
     realMobile: true,
+    autoGrantPermissions: true,
+    autoAcceptAlerts: true,
     'bstack:options': {
       userName: username,
       accessKey: accessKey,
