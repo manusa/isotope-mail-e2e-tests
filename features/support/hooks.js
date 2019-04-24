@@ -36,19 +36,27 @@ let driver;
 BeforeAll(function() {
   driver = createBrowserStackSession(BROWSERS[browserId]);
 });
-Before(async function () {
+Before(async function (scenario) {
   const world = this;
   world.driver = driver;
   driver.manage().deleteAllCookies();
-});
-AfterAll(function() {
-  driver.quit();
+  let handles = await driver.getAllWindowHandles();
+  if (handles.length > 1) {
+    await driver.close();
+    await driver.switchTo().window(handles[0]);
+  }
+  await driver.executeScript("window.open();");
+  handles = await driver.getAllWindowHandles();
+  await driver.switchTo().window(handles[handles.length - 1]);
+  console.log(`Scenario "${scenario.pickle.name}" is ready for browser (${browserId})`);
 });
 After(async function (testCase) {
   const world = this;
   if (testCase.result.status === Status.FAILED) {
-    // NO EASY WAY TO DETERMINE CURRENT BROWSER AT THIS POINT
-    // const screenShot = await world.driver.takeScreenshot();
-    // world.attach(screenShot, 'image/png');
+    const screenShot = await world.driver.takeScreenshot();
+    world.attach(screenShot, 'image/png');
   }
+});
+AfterAll(async function() {
+  driver.quit();
 });

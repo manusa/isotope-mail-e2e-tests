@@ -17,4 +17,3 @@ Feature: Login
     Given a login form in the URL https://isotope.marcnuri.com
     When I fill in and submit the login form
     Then I'm logged in and redirected to the main application page
-

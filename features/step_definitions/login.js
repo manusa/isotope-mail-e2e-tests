@@ -16,8 +16,8 @@ Given(/^a fixed login route URL (.*)$/,
     url = givenUrl;
     driver = world.driver;
   });
-When(/^I access this URL to login$/, function() {
-  driver.get(url);
+When(/^I access this URL to login$/, async function() {
+  await driver.get(url);
 });
 Then(/^I'm shown a login page with a form to input my credentials$/,
   async function() {
@@ -37,8 +37,8 @@ Given(/^Isotope's base URL (.*)$/,
     url = givenUrl;
     driver = world.driver;
   });
-When(/^I access this URL without a session$/, function() {
-  driver.get(url);
+When(/^I access this URL without a session$/, async function() {
+  await driver.get(url);
 });
 Then(/^I'm redirected to the login page$/,
   async function() {
@@ -55,7 +55,7 @@ Given(/^a login form in the URL (.*)$/,
   async function(givenUrl) {
     const world = this;
     driver = world.driver;
-    driver.get(givenUrl);
+    await driver.get(givenUrl);
     await driver.wait(until.elementLocated(By.css('div[class^="login--background"]')));
   });
 When(/^I fill in and submit the login form$/,
@@ -74,6 +74,7 @@ When(/^I fill in and submit the login form$/,
     const smtpSsl = await container.findElement(By.css('#smtpSsl'));
     smtpSsl.click();
     const loginButton = await driver.wait(until.elementLocated(By.css('button[class^="mdc-button loginButton"]')));
+    await driver.executeScript("arguments[0].scrollIntoView();", loginButton);
     await loginButton.click();
   });
 Then(/^I'm logged in and redirected to the main application page$/,
