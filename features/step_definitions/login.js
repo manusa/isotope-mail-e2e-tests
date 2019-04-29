@@ -1,9 +1,9 @@
 const {Given, Then, When} = require('cucumber');
-const {By, until, Key} = require('selenium-webdriver');
+const {By, until} = require('selenium-webdriver');
+const {login} = require('./common');
 
 const chai = require('chai');
 const expect = chai.expect;
-
 let url;
 let driver;
 
@@ -58,25 +58,9 @@ Given(/^a login form in the URL (.*)$/,
     await driver.get(givenUrl);
     await driver.wait(until.elementLocated(By.css('div[class^="login--background"]')));
   });
-When(/^I fill in and submit the login form$/,
-  async function() {
-    const container = await driver.wait(until.elementLocated(By.css('div[class^="login--container"]')));
-    const serverHost = await container.findElement(By.css('#serverHost'));
-    serverHost.sendKeys('isotope');
-    const user = await container.findElement(By.css('#user'));
-    user.sendKeys('isotope');
-    const password = await container.findElement(By.css('#password'));
-    password.sendKeys('demo');
-    const advancedButton = container.findElement(By.css('button[class^="mdc-button advancedButton"]'));
-    await advancedButton.click();
-    const smtpPort = await container.findElement(By.css('#smtpPort'));
-    smtpPort.sendKeys(Key.BACK_SPACE, Key.BACK_SPACE, Key.BACK_SPACE, '25');
-    const smtpSsl = await container.findElement(By.css('#smtpSsl'));
-    smtpSsl.click();
-    const loginButton = await driver.wait(until.elementLocated(By.css('button[class^="mdc-button loginButton"]')));
-    await driver.executeScript("arguments[0].scrollIntoView();", loginButton);
-    await loginButton.click();
-  });
+When(/^I fill in and submit the login form$/, async function() {
+  await login(driver);
+});
 Then(/^I'm logged in and redirected to the main application page$/,
   async function() {
     const world = this;
