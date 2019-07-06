@@ -7,6 +7,6 @@ Feature: Sidebar
     Given Main application URL https://isotope.marcnuri.com
     And I login to the application
 
-  Scenario: Sidebar is expanded by default
-    When I'm in the main view
+  Scenario: Sidebar is expanded by default on desktop
+    When I'm in the main view with a desktop browser
     Then Sidebar is expanded by default
